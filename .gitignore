@@ -1,5 +1,7 @@
 
 # Playwright
+.env
+.env.test
 .DS_Store
 node_modules/
 /test-results/
