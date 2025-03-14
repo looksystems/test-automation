@@ -6,6 +6,7 @@ import { test, expect } from '@playwright/test';
 
 const emailAddress = process.env.TEST_USERNAME;
 const password = process.env.TEST_PASSWORD;
+export const teriURL: string = "https://teri-for-ops.dev.aviva.fabricfintech.com";
 
 export async function login(page) {
   await page.goto('https://teri-for-ops.dev.aviva.fabricfintech.com/login');
@@ -15,5 +16,6 @@ export async function login(page) {
   await page.getByRole('textbox', { name: 'Email address' }).press('Tab');
   await page.getByRole('textbox', { name: 'Password' }).fill(password);
   await page.getByRole('textbox', { name: 'Password' }).press('Enter');
-  await expect(page).toHaveURL('https://teri-for-ops.dev.aviva.fabricfintech.com/', { timeout: 30000}); //timeout extends time test waits
+  await expect(page).toHaveURL(teriURL, { timeout: 30000}); //timeout extends time test waits
 } 
+

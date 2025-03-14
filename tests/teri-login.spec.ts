@@ -1,3 +1,7 @@
+import * as dotenv from 'dotenv';
+
+// Load the .env file
+dotenv.config({path: __dirname+'/.env'});
 import { test, expect } from '@playwright/test';
 import { login } from './utils.ts';
 
