@@ -1,6 +1,8 @@
 import { test, expect, Page } from '@playwright/test';
 import { chromium } from 'playwright';
 import { login, teriURL } from './utils.ts';
+import { HomePage } from './home-page.ts';
+import { BookmarkPage } from './bookmark-page.ts';
 
 let testPage: Page;
 let testTime = (new Date).toUTCString();
@@ -15,6 +17,16 @@ test.afterAll(async () => {
   await testPage.close();
 });
 
+
+test('it can save a bookmark', async () => {
+  let homePage = new HomePage(testPage);
+  homePage.goto();
+  homePage.search('hello');
+  homePage.addBookmark(bookmarkName);
+  await expect(testPage.locator('#app')).toContainText('Bookmark saved');
+});
+
+/*
 test('it can save a bookmark', async () => {
   await testPage.goto(teriURL, { timeout: 30000});
   await expect(testPage.locator('#app')).toContainText('Ask me anything about finance');
@@ -35,7 +47,7 @@ test('it lists the recorded bookmark', async () => {
   await expect(testPage.locator('#app')).toContainText(bookmarkName);
 });
 
-/* test('it can be saved to a group', async () => {
+test('it can be saved to a group', async () => {
   await testPage.goto(teriURL, { timeout: 30000});
   await expect(testPage.locator('#app')).toContainText('Ask me anything about finance');
   await testPage.getByRole('button').filter({ hasText: /^$/ }).nth(2).click(); // open sidebar
@@ -53,9 +65,9 @@ test('it lists the recorded bookmark', async () => {
   await testPage.getByRole('link', { name: 'Groups' }).click();
   await testPage.getByRole('link', { name: 'automationTestGroup a few' }).click();
   await expect(testPage.locator('#app')).toContainText(bookmarkName);
-}) */
+})
 
-/* test('it can be saved to a group', async () => {
+test('it can be saved to a group', async () => {
   await testPage.goto(teriURL, { timeout: 30000});
   await expect(testPage.locator('#app')).toContainText('Ask me anything about finance');
   await testPage.getByRole('button').filter({ hasText: /^$/ }).nth(2).click(); // open sidebar
@@ -74,7 +86,7 @@ test('it lists the recorded bookmark', async () => {
   await testPage.getByRole('link', { name: 'Groups' }).click();
   await testPage.getByRole('link', { name: 'automationTestGroup' }).first().click();
   await expect(testPage.locator('#app')).toContainText(bookmarkName);
-}) */
+}) 
 
 test('bookmark can be deleted', async () => {
   await testPage.goto(teriURL, { timeout: 30000});
@@ -90,3 +102,5 @@ test('bookmark can be deleted', async () => {
   //await testPage.locator('.m-1 > button').nth(-1).getByRole('button', { name: 'Yes' }).click();
   //await expect(testPage.locator('#app')).not.toContainText(bookmarkName);
 })
+
+*/
